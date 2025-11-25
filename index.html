@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIRATE BORG Character Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header no-print">
+            <h1>⚓ PIRATE BORG ⚓</h1>
+            <h2>Cursed Crew Generator</h2>
+            <button id="generateBtn" class="btn-generate">ROLL A NEW SCALLYWAG</button>
+            <button id="printBtnHeader" class="btn-print">PRINT CHARACTER</button>
+        </header>
+
+        <!-- Character Sheet -->
+        <div class="character-sheet">
+            <!-- Name and Class -->
+            <section class="character-header">
+                <div class="name-section">
+                    <label>NAME</label>
+                    <h3 id="charName">---</h3>
+                </div>
+                <div class="class-section">
+                    <label>CLASS</label>
+                    <h3 id="charClass">---</h3>
+                </div>
+            </section>
+
+            <!-- Class Abilities -->
+            <section class="class-abilities">
+                <h4>CLASS ABILITIES</h4>
+                <div id="classAbilities">
+                    <p>---</p>
+                </div>
+            </section>
+
+            <!-- Idiosyncrasies -->
+            <section class="idiosyncrasies">
+                <h4>☠️ IDIOSYNCRASIES ⚔️</h4>
+                <p id="idiosyncrasy">---</p>
+            </section>
+
+            <!-- Unfortunate Incidents & Conditions -->
+            <section class="unfortunate-incidents">
+                <h4>☠️ UNFORTUNATE INCIDENTS & CONDITIONS ⚔️</h4>
+                <p id="unfortunateIncident">---</p>
+            </section>
+
+            <!-- Abilities -->
+            <section class="abilities">
+                <h4>ABILITIES</h4>
+                <div class="ability-grid">
+                    <div class="ability">
+                        <span class="ability-name">STRENGTH</span>
+                        <span class="ability-score" id="strength">-</span>
+                    </div>
+                    <div class="ability">
+                        <span class="ability-name">AGILITY</span>
+                        <span class="ability-score" id="agility">-</span>
+                    </div>
+                    <div class="ability">
+                        <span class="ability-name">PRESENCE</span>
+                        <span class="ability-score" id="presence">-</span>
+                    </div>
+                    <div class="ability">
+                        <span class="ability-name">TOUGHNESS</span>
+                        <span class="ability-score" id="toughness">-</span>
+                    </div>
+                    <div class="ability">
+                        <span class="ability-name">SPIRIT</span>
+                        <span class="ability-score" id="spirit">-</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hit Points and Stats -->
+            <section class="stats">
+                <div class="stat-box">
+                    <label>HIT POINTS</label>
+                    <div class="stat-value" id="hitPoints">-</div>
+                </div>
+                <div class="stat-box">
+                    <label>DEVIL'S LUCK</label>
+                    <div class="stat-value" id="omens">-</div>
+                </div>
+                <div class="stat-box">
+                    <label>SILVER</label>
+                    <div class="stat-value" id="silver">-</div>
+                </div>
+            </section>
+
+            <!-- Starting Equipment -->
+            <section class="equipment">
+                <h4>STARTING EQUIPMENT</h4>
+                <div class="equipment-grid">
+                    <div class="equipment-item">
+                        <label>WEAPON</label>
+                        <p id="weapon">---</p>
+                    </div>
+                    <div class="equipment-item">
+                        <label>CLOTHING</label>
+                        <p id="clothing">---</p>
+                    </div>
+                    <div class="equipment-item">
+                        <label>HAT</label>
+                        <p id="hat">---</p>
+                    </div>
+                </div>
+                <div class="equipment-grid">
+                    <div class="equipment-item">
+                        <label>CONTAINER</label>
+                        <p id="container">---</p>
+                    </div>
+                    <div class="equipment-item">
+                        <label>CHEAP GEAR</label>
+                        <p id="cheapGear">---</p>
+                    </div>
+                    <div class="equipment-item">
+                        <label>FANCY GEAR</label>
+                        <p id="fancyGear">---</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Background -->
+            <section class="background">
+                <h4>BACKGROUND / ITEM or TRAIT</h4>
+                <p id="background">---</p>
+            </section>
+
+            <!-- Distinctive Flaws -->
+            <section class="quirk">
+                <h4>DISTINCTIVE FLAWS</h4>
+                <p id="quirk">---</p>
+            </section>
+
+            <!-- Arcane Ritual (if applicable) -->
+            <section class="ritual" id="ritualSection" style="display: none;">
+                <h4>ARCANE RITUAL</h4>
+                <div id="ritual">
+                    <p>---</p>
+                </div>
+            </section>
+
+            <!-- Physical Trademark -->
+            <section class="phys_trademark">
+                <h4>PHYSICAL TRADEMARK</h4>
+                <p id="trademark">---</p>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer no-print">
+            <p>PIRATE BORG Character Generator</p>
+            <p>Copyright MORK BORG by Stockholm Kartell & Johan Nohr</p>
+            <p>Copyright PIRATE BORG by Luke Stratton, Limithron LLC</p>
+            <p>Generator inspired by SCVMBIRTHER</p>
+            <button id="printBtn" class="btn-print">🖨️ PRINT CHARACTER</button>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

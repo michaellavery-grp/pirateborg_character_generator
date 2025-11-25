@@ -1,0 +1,27 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backup files
+*.20251124
+*.20251124_2
+script.js.backup*
+
+# Image source files (keep JPG, ignore HEIC)
+*.heic
+*.HEIC
+
+# Thumbnails
+._*
+
+# Files that might contain sensitive data
+.env
+.env.local
+
+# Editor directories and files
+.idea
+.vscode
+*.swp
+*.swo
+*~

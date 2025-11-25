@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIRATE BORG Character Sheet - Print</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 0.5in;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 9pt;
+            line-height: 1.2;
+            color: black;
+            background: white;
+        }
+
+        .character-sheet {
+            width: 100%;
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            border-bottom: 3px double black;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 2px;
+        }
+
+        .name-class {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .field {
+            border: 1px solid black;
+            padding: 3px 5px;
+        }
+
+        .field-label {
+            font-size: 7pt;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .field-value {
+            font-size: 10pt;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+
+        .stat-box {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 6pt;
+            font-weight: bold;
+        }
+
+        .stat-value {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+
+        /* Equipment Grid */
+        .equipment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+
+        .equipment-box {
+            border: 1px solid black;
+            padding: 3px;
+        }
+
+        .equipment-label {
+            font-size: 6pt;
+            font-weight: bold;
+        }
+
+        .equipment-value {
+            font-size: 7pt;
+        }
+
+        /* Text Sections */
+        .section {
+            border: 1px solid black;
+            padding: 4px;
+            margin-bottom: 4px;
+        }
+
+        .section-title {
+            font-size: 7pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+            border-bottom: 1px solid black;
+            padding-bottom: 1px;
+        }
+
+        .section-content {
+            font-size: 7pt;
+            line-height: 1.1;
+        }
+
+        /* Compact layout for traits */
+        .traits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        /* Auto-print */
+        @media print {
+            body {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="character-sheet">
+        <!-- Header -->
+        <div class="header">
+            <h1>⚓ PIRATE BORG ⚓</h1>
+        </div>
+
+        <!-- Name and Class -->
+        <div class="name-class">
+            <div class="field">
+                <div class="field-label">Name</div>
+                <div class="field-value" id="name">---</div>
+            </div>
+            <div class="field">
+                <div class="field-label">Class</div>
+                <div class="field-value" id="class">---</div>
+            </div>
+        </div>
+
+        <!-- Stats: Abilities + HP/Devil's Luck/Silver -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-label">STR</div>
+                <div class="stat-value" id="strength">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">AGI</div>
+                <div class="stat-value" id="agility">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">PRE</div>
+                <div class="stat-value" id="presence">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">TOU</div>
+                <div class="stat-value" id="toughness">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">SPI</div>
+                <div class="stat-value" id="spirit">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">HP</div>
+                <div class="stat-value" id="hp">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">LUCK</div>
+                <div class="stat-value" id="luck">-</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">SILVER</div>
+                <div class="stat-value" id="silver">-</div>
+            </div>
+        </div>
+
+        <!-- Equipment -->
+        <div class="equipment-grid">
+            <div class="equipment-box">
+                <div class="equipment-label">WEAPON</div>
+                <div class="equipment-value" id="weapon">---</div>
+            </div>
+            <div class="equipment-box">
+                <div class="equipment-label">CLOTHING</div>
+                <div class="equipment-value" id="clothing">---</div>
+            </div>
+            <div class="equipment-box">
+                <div class="equipment-label">HAT</div>
+                <div class="equipment-value" id="hat">---</div>
+            </div>
+            <div class="equipment-box">
+                <div class="equipment-label">CONTAINER</div>
+                <div class="equipment-value" id="container">---</div>
+            </div>
+            <div class="equipment-box">
+                <div class="equipment-label">CHEAP GEAR</div>
+                <div class="equipment-value" id="cheapGear">---</div>
+            </div>
+            <div class="equipment-box">
+                <div class="equipment-label">FANCY GEAR</div>
+                <div class="equipment-value" id="fancyGear">---</div>
+            </div>
+        </div>
+
+        <!-- Class Abilities -->
+        <div class="section">
+            <div class="section-title">Class Abilities</div>
+            <div class="section-content" id="classAbilities">---</div>
+        </div>
+
+        <!-- Personality Traits (2 columns) -->
+        <div class="traits-grid">
+            <div class="section">
+                <div class="section-title">Idiosyncrasy</div>
+                <div class="section-content" id="idiosyncrasy">---</div>
+            </div>
+            <div class="section">
+                <div class="section-title">Unfortunate Incident</div>
+                <div class="section-content" id="unfortunateIncident">---</div>
+            </div>
+        </div>
+
+        <!-- Background -->
+        <div class="section">
+            <div class="section-title">Background / Item or Trait</div>
+            <div class="section-content" id="background">---</div>
+        </div>
+
+        <!-- Bottom Traits (2 columns) -->
+        <div class="traits-grid">
+            <div class="section">
+                <div class="section-title">Distinctive Flaw</div>
+                <div class="section-content" id="distinctiveFlaw">---</div>
+            </div>
+            <div class="section">
+                <div class="section-title">Physical Trademark</div>
+                <div class="section-content" id="physicalTrademark">---</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get character data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const characterData = JSON.parse(decodeURIComponent(urlParams.get('data') || '{}'));
+
+        // Populate all fields
+        document.getElementById('name').textContent = characterData.name || '---';
+        document.getElementById('class').textContent = characterData.class || '---';
+        document.getElementById('strength').textContent = characterData.strength || '-';
+        document.getElementById('agility').textContent = characterData.agility || '-';
+        document.getElementById('presence').textContent = characterData.presence || '-';
+        document.getElementById('toughness').textContent = characterData.toughness || '-';
+        document.getElementById('spirit').textContent = characterData.spirit || '-';
+        document.getElementById('hp').textContent = characterData.hp || '-';
+        document.getElementById('luck').textContent = characterData.luck || '-';
+        document.getElementById('silver').textContent = characterData.silver || '-';
+        document.getElementById('weapon').textContent = characterData.weapon || '---';
+        document.getElementById('clothing').textContent = characterData.clothing || '---';
+        document.getElementById('hat').textContent = characterData.hat || '---';
+        document.getElementById('container').textContent = characterData.container || '---';
+        document.getElementById('cheapGear').textContent = characterData.cheapGear || '---';
+        document.getElementById('fancyGear').textContent = characterData.fancyGear || '---';
+        document.getElementById('classAbilities').textContent = characterData.classAbilities || '---';
+        document.getElementById('idiosyncrasy').textContent = characterData.idiosyncrasy || '---';
+        document.getElementById('unfortunateIncident').textContent = characterData.unfortunateIncident || '---';
+        document.getElementById('background').textContent = characterData.background || '---';
+        document.getElementById('distinctiveFlaw').textContent = characterData.distinctiveFlaw || '---';
+        document.getElementById('physicalTrademark').textContent = characterData.physicalTrademark || '---';
+
+        // Auto-print when page loads
+        window.onload = function() {
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        };
+    </script>
+</body>
+</html>
