@@ -267,6 +267,108 @@ const SORCERER_FEATURES = [
     "Raise the Dead (pg. 45)"
 ];
 
+// d100 Thing of Importance Table
+const THING_OF_IMPORTANCE = [
+    "animal pelt",
+    "oyster pearl",
+    "silver locket",
+    "conch shell",
+    "pipe carved from wood",
+    "severed toes from bandits",
+    "evil jade figurine",
+    "ancient gold coin",
+    "piece of a treasure map",
+    "map of an unknown place",
+    "diary written in another language",
+    "ivory chess piece",
+    "ivory dice",
+    "jar containing a severed hand",
+    "necklace of bones & feathers",
+    "book of scripture",
+    "hand you found as a child",
+    "bizarre silk handkerchief",
+    "pouch containing animal teeth",
+    "old fillet knife",
+    "faceted ball of strange fish",
+    "piece of colorful coral",
+    "small ship in a bottle",
+    "letter from a loved one",
+    "the portrait of a dead explorer",
+    "some embossed snuff, a necromaid",
+    "vial of holy water from clergy in old homeport",
+    "the remains of a small squid in a jar",
+    "precious cooking salts in a tiny chest",
+    "tankard made from a horn",
+    "jar of the finest tobacco",
+    "golden letter opener",
+    "small, mint bronze owl figurine",
+    "collection of sea shells and rocks",
+    "necklace carved from jade",
+    "a recently deceased relative will naming you as the sole heir",
+    "drawing of a loved one",
+    "bag of 'magical' white powder",
+    "old rusted key with a blue gem that glows in the moonlight",
+    "compass that doesn't point north",
+    "clay jar you are using as an urn",
+    "definitive proof of an enemy's (or loved one's) crime",
+    "small golden bell",
+    "old bottle of red wine (Bordeaux, incredible vintage)",
+    "jar of dried jellyfish dust",
+    "multi-colored feather",
+    "necklace from a loved one",
+    "ring that doesn't fit on your fingers",
+    "single diamond earring",
+    "finely made leather eye patch",
+    "set of gardening tools",
+    "dried flower",
+    "animal skull",
+    "human skull",
+    "gem that glows in seawater",
+    "dinosaur or monster bone or claw",
+    "jar of fireflies",
+    "leather-bound tome in a language you don't recognize",
+    "blueprints to a new type of ship",
+    "carved arrowhead",
+    "stone tablet inscribed with ancient pictographs or hieroglyphs",
+    "perfect cube made of crystal",
+    "tattoo, d4: 1 love, 2 revenge, 3 ancestor, 4 unknown origin",
+    "bottle of perfumed oil",
+    "broken set of manacles",
+    "broken compass",
+    "pewel with one shot answer for [?]",
+    "cork from a bottle, from a special occasion",
+    "flag of personal significance",
+    "broken spyglass with a scroll or map hidden inside",
+    "length of rope you made",
+    "carved gaming pieces",
+    "set of runestones",
+    "twig from a very old tree",
+    "noose taken from a corpse",
+    "d'length of chain",
+    "gills scars from lashes on your back",
+    "long scar on your face",
+    "coconut carved to perfection",
+    "dark robe, cape, or cloak",
+    "cask of strong sassafras beer",
+    "set of keys on a large key ring",
+    "small keg of something valuable (rum, powder, ashes, ASH)",
+    "magnifying lens (glass only)",
+    "cannonball",
+    "deck of cards with d4 cards missing and d6 'extra' cards",
+    "garment from someone special",
+    "wanted poster; d4: 1 legend, 2 enemy, 3 loved one, 4 stranger",
+    "fancy wig",
+    "letter of political importance",
+    "tanned whale skin or jar of blubber",
+    "petrified egg",
+    "monkey paw extending 1 finger",
+    "memorized poem that sounds like a map",
+    "medallion that might be the top of a staff",
+    "talisman shaped like a snake",
+    "glass vial of dark blood",
+    "shard of crystal"
+];
+
 // d100 Background Table - Each entry: {name, silver, item/trait}
 const BACKGROUNDS = [
     {name: "sailor", silver: "2d6 x 10s", item: "a reason to go to sea"},
@@ -788,6 +890,10 @@ function generateCharacter() {
     // Display background (name + item/trait)
     document.getElementById('background').textContent = `${background.name} - ${background.item}`;
 
+    // Generate Thing of Importance (d100)
+    const thingRoll = roll(100) - 1; // 0-99 for array index
+    document.getElementById('thingOfImportance').textContent = THING_OF_IMPORTANCE[thingRoll];
+
     // Generate distinctive flaw
     const habit = DISTINCTIVE_FLAWS[Math.floor(Math.random() * DISTINCTIVE_FLAWS.length)];
     document.getElementById('quirk').textContent = habit;
@@ -868,6 +974,7 @@ function printCharacter() {
         idiosyncrasy: document.getElementById('idiosyncrasy').textContent,
         unfortunateIncident: document.getElementById('unfortunateIncident').textContent,
         background: document.getElementById('background').textContent,
+        thingOfImportance: document.getElementById('thingOfImportance').textContent,
         distinctiveFlaw: document.getElementById('quirk').textContent,
         physicalTrademark: document.getElementById('trademark').textContent
     };

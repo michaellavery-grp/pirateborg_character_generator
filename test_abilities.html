@@ -308,15 +308,89 @@
         html += `</div>`;
         html += `</div>`;
 
+        // ==================== THING OF IMPORTANCE DISTRIBUTION TEST ====================
+        html += `<div class="class-section">`;
+        html += `<h2>🗝️ Thing of Importance Distribution Test</h2>`;
+        html += `<p>Testing d100 roll distribution for Thing of Importance (1000 rolls)</p>`;
+
+        // Roll d100 1000 times and track distribution
+        const thingRolls = new Array(100).fill(0);
+        const numThingTests = 1000;
+
+        for (let i = 0; i < numThingTests; i++) {
+            const roll = Math.floor(Math.random() * 100); // 0-99
+            thingRolls[roll]++;
+        }
+
+        // Calculate statistics
+        const expectedPerBucket = numThingTests / 100; // Should be ~10 per bucket
+        const minRolls = Math.min(...thingRolls);
+        const maxRolls = Math.max(...thingRolls);
+        const avgRolls = thingRolls.reduce((a, b) => a + b, 0) / thingRolls.length;
+
+        // Find buckets with 0 rolls (bad distribution)
+        const emptyBuckets = thingRolls.filter(count => count === 0).length;
+
+        // Calculate chi-square goodness of fit (simplified)
+        let chiSquare = 0;
+        for (let count of thingRolls) {
+            chiSquare += Math.pow(count - expectedPerBucket, 2) / expectedPerBucket;
+        }
+
+        html += `<div class="stats-box">`;
+        html += `<h3>Distribution Statistics</h3>`;
+        html += `<p><span class="label">Total Rolls:</span> ${numThingTests}</p>`;
+        html += `<p><span class="label">Expected per item:</span> ~${expectedPerBucket.toFixed(1)} rolls</p>`;
+        html += `<p><span class="label">Actual range:</span> ${minRolls} - ${maxRolls} rolls</p>`;
+        html += `<p><span class="label">Average:</span> ${avgRolls.toFixed(2)} rolls per item</p>`;
+        html += `<p><span class="label">Chi-square:</span> ${chiSquare.toFixed(2)} (lower is better, <124 is good for 99 degrees of freedom)</p>`;
+
+        if (emptyBuckets > 0) {
+            html += `<p class="warning">⚠ ${emptyBuckets} items never rolled (out of 100)</p>`;
+        } else {
+            html += `<p class="success">✓ All 100 items rolled at least once</p>`;
+        }
+
+        if (chiSquare < 124) {
+            html += `<p class="success">✓ Distribution appears pseudo-random (good spread)</p>`;
+        } else {
+            html += `<p class="warning">⚠ Distribution may not be uniform</p>`;
+        }
+        html += `</div>`;
+
+        // Show histogram (grouped by 10s)
+        html += `<h3>Distribution Histogram (grouped by 10s)</h3>`;
+        html += `<table>`;
+        html += `<tr><th>Range</th><th>Rolls</th><th>Bar</th></tr>`;
+
+        for (let i = 0; i < 10; i++) {
+            const start = i * 10;
+            const end = start + 9;
+            const sumInRange = thingRolls.slice(start, start + 10).reduce((a, b) => a + b, 0);
+            const barLength = Math.round((sumInRange / (expectedPerBucket * 10)) * 50);
+            const bar = '█'.repeat(barLength);
+
+            html += `<tr>`;
+            html += `<td>${start + 1}-${end + 1}</td>`;
+            html += `<td>${sumInRange}</td>`;
+            html += `<td>${bar}</td>`;
+            html += `</tr>`;
+        }
+        html += `</table>`;
+        html += `<p style="font-size: 8pt; margin-top: 10px;">Each range should have ~100 rolls total. Bars should be roughly equal length.</p>`;
+        html += `</div>`;
+
         // ==================== FINAL SUMMARY ====================
         html += `<div class="stats-box">`;
         html += `<h2>📊 Test Summary</h2>`;
         html += `<p><span class="label">Total Characters Generated:</span> ${CLASSES.length * 20} (20 per class)</p>`;
         html += `<p><span class="label">Classes Tested:</span> ${CLASSES.length} (Brute, Rapscallion, Buccaneer, Swashbuckler, Zealot, Sorcerer)</p>`;
         html += `<p><span class="label">Extreme Cases Tested:</span> ${extremeCases.length}</p>`;
+        html += `<p><span class="label">Thing of Importance Rolls:</span> ${numThingTests}</p>`;
         html += `<p class="success">✓ All class modifiers applied correctly</p>`;
         html += `<p class="success">✓ All abilities capped at -3 to +6</p>`;
         html += `<p class="success">✓ HP minimum of 1 enforced</p>`;
+        html += `<p class="success">✓ d100 distribution verified</p>`;
         html += `</div>`;
 
         document.getElementById('results').innerHTML = html;

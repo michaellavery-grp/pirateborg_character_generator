@@ -7,7 +7,7 @@ A web-based character generator for the PIRATE BORG tabletop roleplaying game, c
 - **Random Character Generation**: Roll up cursed crew members with the click of a button
 - **Print-Friendly Layout**: Clean, single-page character sheets optimized for printing
 - **Dark Aesthetic**: Grimy pirate theme with blood red and gold accents
-- **Authentic Game Mechanics**: Uses 3d6 take-middle for ability scores (Mork Borg style)
+- **Authentic Game Mechanics**: Uses 3d6 for ability scores 
 - **Six Pirate Classes**: Brute, Rapscallion, Buccaneer, Swashbuckler, Zealot, Sorcerer
 - **20 Arcane Rituals**: From "Call of the Sea" to "Weathercraft"
 - **Character Depth**: Backgrounds, distinctive flaws, physical trademarks, and more
@@ -28,20 +28,20 @@ A web-based character generator for the PIRATE BORG tabletop roleplaying game, c
 - **TOUGHNESS**: Endurance, resilience, and hit points
 - **SPIRIT**: Magical power and ritual casting
 
-All abilities rolled using 3d6 (take middle value), subtract 10, divide by 2 (rounded down).
+All abilities rolled using 3d6, subtract 10, divide by 2 (rounded down).
 
 ### Character Stats
 - **Hit Points**: Based on class hit die + Toughness modifier (minimum 1)
 - **Omens**: Rolled d2 (luck points for avoiding death)
-- **Silver**: Starting money based on class (5-30 pieces)
+- **Silver**: Starting money based on class (40-180 pieces)
 
 ### Character Elements
-- **Name**: Random pirate names from a pool of 20
+- **Name**: Random pirate names from a pool of 36 first names(male and female = 72), 36 nicknames and 36 surnames
 - **Class**: Six classes with unique abilities and equipment
-- **Background**: 10 seafaring origin stories
-- **Distinctive Flaws**: 20 personality quirks and bad habits
-- **Physical Trademark**: 20 physical characteristics
-- **Arcane Rituals**: 20 spells for Sorcerer/Zealot classes (conditional display)
+- **Background**: seafaring origin stories
+- **Distinctive Flaws**: personality quirks and bad habits
+- **Physical Trademark**: physical characteristics
+- **Arcane Rituals**: spells for Sorcerer/Zealot classes (conditional display)
 
 ## Classes
 
@@ -126,7 +126,35 @@ An eldritch occultist, frail and enigmatic.
 
 ## Release Notes
 
-### v0.5.0 - "Class Features & Name Generator" (Current)
+### v0.6.0 - "Thing of Importance" (Current)
+**Date**: November 25, 2025
+
+#### Thing of Importance System
+- 🗝️ **d100 Thing of Importance Table**: Complete 100-item table from Pirate Borg rulebook
+  - Every character gets a random item rolled on d100
+  - Items range from mundane to mysterious to macabre
+  - Examples: animal pelt, jar containing a severed hand, compass that doesn't point north, glass vial of dark blood
+  - Displayed on character sheet between Background and Distinctive Flaws
+  - Included in print layout
+
+- 📊 **Distribution Testing**: Added comprehensive d100 distribution tests
+  - Tests 1000 rolls for uniform distribution
+  - Chi-square goodness of fit analysis
+  - Histogram showing distribution across all 100 items
+  - Verifies pseudo-random number generator quality
+
+#### Complete d100 Item List
+Items include personal treasures, mysterious artifacts, and grim mementos:
+- **Personal Items**: silver locket, letter from a loved one, drawing of a loved one, necklace from a loved one
+- **Mysterious Objects**: compass that doesn't point north, old rusted key with blue gem that glows in moonlight, perfect cube made of crystal
+- **Macabre Treasures**: jar containing a severed hand, severed toes from bandits, noose taken from a corpse, monkey paw extending 1 finger
+- **Valuable Goods**: ancient gold coin, single diamond earring, bottle of perfumed oil, jar of the finest tobacco
+- **Strange Artifacts**: stone tablet with ancient pictographs, leather-bound tome in unknown language, talisman shaped like a snake
+- **Scars & Tattoos**: gills scars from lashes on your back, long scar on your face, tattoo (d4 sub-roll for meaning)
+
+---
+
+### v0.5.0 - "Class Features & Name Generator"
 **Date**: November 24, 2025
 
 #### Name Generator System
@@ -544,8 +572,8 @@ Potential additions for future versions:
 
 ---
 
-**Current Version**: v0.5.0 "Class Features & Name Generator"
-**Last Updated**: November 24, 2025
+**Current Version**: v0.6.0 "Thing of Importance"
+**Last Updated**: November 25, 2025
 **Status**: Active Development
 
 *"The seas call, the dead rise, and ASH flows freely..."* 🏴‍☠️
