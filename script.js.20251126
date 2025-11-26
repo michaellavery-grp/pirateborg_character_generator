@@ -158,7 +158,7 @@ const CLASSES = [
         hp: "d12",
         devilsLuck: "d2",
         featureDie: "d6",
-        abilities: "A tough melee combatant prone to fits of RAGE. When you're not bashing, smashing, slashing or crashing, you're ... well, that's all you really know how to do. you can't use Arcane Rituals, but your muscles are basically \"magic.\" (pg. 34)",
+        abilities: "A tough melee combatant prone to fits of RAGE.",
         modifiers: {strength: 1, agility: 0, presence: -1, toughness: 1, spirit: -1}
     },
     {
@@ -166,7 +166,7 @@ const CLASSES = [
         hp: "d8",
         devilsLuck: "d2",
         featureDie: "d6",
-        abilities: "A sneaky, cutthroat scallywag good at backstabbing, breaking and entering, stealing, cheating and escaping. Found in taverns, shadows, and shallow graves. You will need a deck of playing cards... (pg.36)",
+        abilities: "A sneaky, cutthroat scallywag good at backstabbing, breaking and entering, stealing, cheating and escaping.",
         modifiers: {strength: -1, agility: 2, presence: 0, toughness: -1, spirit: 0}
     },
     {
@@ -174,7 +174,7 @@ const CLASSES = [
         hp: "d8",
         devilsLuck: "d2",
         featureDie: "d6",
-        abilities: "Buccaneers are skilled trackers and survivalists. Also expert sharpshooters. Start with musket and 10 + PRESENCE rounds of shot. (pg. 38)",
+        abilities: "Skilled trackers and survivalists.",
         modifiers: {strength: 0, agility: -1, presence: 2, toughness: 0, spirit: -1}
     },
     {
@@ -182,7 +182,7 @@ const CLASSES = [
         hp: "d10",
         devilsLuck: "d2",
         featureDie: "d6",
-        abilities: "A brash fighter with bravado and swagger. (pg. 41)",
+        abilities: "A brash fighter with bravado and swagger.",
         modifiers: {strength: 1, agility: 1, presence: -1, toughness: 0, spirit: -1}
     },
     {
@@ -190,7 +190,7 @@ const CLASSES = [
         hp: "d8",
         devilsLuck: "d4",
         featureDie: "d10",
-        abilities: "A clergy member, cultist, shaman or believer. Thou may use ancient relics and arcane rituals whilst wearing medium armor (tier 2 or lower). d2 + SPIRIT prayers per day. (pg. 42)",
+        abilities: "A clergy member, cultist, shaman or believer.",
         modifiers: {strength: 0, agility: -1, presence: 0, toughness: -1, spirit: 2}
     },
     {
@@ -198,73 +198,73 @@ const CLASSES = [
         hp: "d8",
         devilsLuck: "d4",
         featureDie: "d6",
-        abilities: "An eldritch occultist, frail and enigmatic. They are conduits for meddlesome natural spirits and devious necromantic entities. (pg. 44)",
+        abilities: "An eldritch occultist, frail and enigmatic.",
         modifiers: {strength: -1, agility: 0, presence: 0, toughness: -1, spirit: 2}
     }
 ];
 
 // Class Features - Brute (d6)
 const BRUTE_FEATURES = [
-    "Brass Anchor, two-handed, d8 (pg. 35)",
-    "Whaling Harpoon, d8 can be thrown w/AGI (pg. 35)",
-    "Meat Cleaver, d4 roll 1 for disease (pg.35)",
-    "Part of a Broken Mast,d8 +d6 for crit (pg. 35)",
-    "Runic Machete, d6 glows when undead nearby (pg. 35)",
-    "Rotten Cargo Net,AGI DR12 to entrap (pg.35)"
+    "Brass Anchor (pg. 35)",
+    "Whaling Harpoon (pg. 35)",
+    "Meat Cleaver (pg.35)",
+    "Part of a Broken Mast (pg. 35)",
+    "Runic Machete (pg. 35)",
+    "Rotten Cargo Net (pg.35)"
 ];
 
 // Class Features - Rapscallion (d6)
 const RAPSCALLION_FEATURES = [
-    "Backstabber,lower attack dr by 2, d2 extra damage (pg. 36-37)",
-    "Burglar,lockpicks, -4 DR to pickpocket, disarm, disable trap (pg. 36-37)",
-    "Skylarker,acrobatic roll AGI DR10 to hit after maneuver (pg. 36-37)",
-    "Sneaky Bastard,sneak attack AGI DR12, auto-crit (pg. 36-37)",
-    "Lucky Devil,when using Devil's Luck draw a card  (pg. 36-37)",
-    "Grog Brewer,brew d4 servings per day of grog poison (pg. 36-37)"
+    "Backstabber (pg. 36-37)",
+    "Burglar (pg. 36-37)",
+    "Skylarker (pg. 36-37)",
+    "Sneaky Bastard (pg. 36-37)",
+    "Lucky Devil (pg. 36-37)",
+    "Grog Brewer (pg. 36-37)"
 ];
 
 // Class Features - Buccaneer (d6)
 const BUCCANEER_FEATURES = [
-    "Treasure Hunter, map and trap stuff -3 DR (pg.38)",
-    "Crack Shot, All ranged attacks -2 DR (pg.38)",
-    "Fix Bayonets!, Your musket is equipped with a bayonet(d4).  (pg.38)",
-    "Focused Aim, Attacks vs. enemies already shot this combat are -4 DR (pg.38)",
-    "Buccan Cook, Start w/d8 rations of smoked meat. Eat for d4 HP. Can cook more (pg.38)",
-    "Survivalist, +1 TOUGHNESS, can't be infected, sick, or poisoned +d4 HP (pg.38)"
+    "Treasure Hunter (pg.38)",
+    "Crack Shot (pg.38)",
+    "Fix Bayonets! (pg.38)",
+    "Focused Aim (pg.38)",
+    "Buccan Cook (pg.38)",
+    "Survivalist (pg.38)"
 ];
 
 // Class Features - Swashbuckler (d6)
 const SWASHBUCKLER_FEATURES = [
-    "Ostentatious Fencer, ATK/DEF DR -2 w/cutlass or rapier. Dueling +1 DMG (pg. 41)",
-    "Flintlock Fanatic, use up to three flintlocks per round. Reload takes one action (pg. 41)",
-    "Scurvy Scallywag, -2 DR when attacking an already atacked enemy (pg. 41)",
-    "Inspiring Leader, during combat roll d4, allies may use this value to add or subtract from rolls (pg. 41)",
-    "Knife Knave, start w/two knives, -2 DR to hit, auto-hit on first hit (pg. 41)",
-    "Black Powder Poet, start w/Bombs from bomb table (pg.53) , -2 DR when lobbing bombs (pg. 41)"
+    "Ostentatious Fencer (pg. 41)",
+    "Flintlock Fanatic (pg. 41)",
+    "Scurvy Scallywag (pg. 41)",
+    "Inspiring Leader (pg. 41)",
+    "Knife Knave (pg. 41)",
+    "Black Powder Poet (pg. 41)"
 ];
 
 // Class Features - Zealot (d10) - Priestly powers
 const ZEALOT_FEATURES = [
-    "Heal, d8 HP gain (pg. 42)",
-    "Curse, DR10 SPIRIT check, D8 + SPIRIT DMG to unseen enemy, d10 if wounded already (pg. 42)",
-    "Death Ward, Resurrect on SPIRIT check DR10 (pg. 42)",
-    "Control Weather, SPIRIT check DR10 to change wind direction (pg. 42)",
-    "Blessed Guidance, Add d4 to roll of any player including self (pg. 42)",
-    "Holy Protection, -4 DR on defense for one round, can be used anytime (pg. 42)",
-    "Divine Light, bright light surrounds you for d6 x 10 minutes. Enemies are -2 DR to defend against (pg. 42)",
-    "Silence, for 2d6 x 10 minutes everything within 25' makes no noise (pg. 42)",
-    "Sanctuary, All allies within sight do d4 HP DMG (pg. 42)",
-    "Commune, Ask your deity a Yay or Nay question SPIRIT DR8 (pg. 42)"
+    "Heal (pg. 42)",
+    "Curse (pg. 42)",
+    "Death Ward (pg. 42)",
+    "Control Weather (pg. 42)",
+    "Blessed Guidance (pg. 42)",
+    "Holy Protection (pg. 42)",
+    "Divine Light (pg. 42)",
+    "Silence (pg. 42)",
+    "Sanctuary (pg. 42)",
+    "Commune (pg. 42)"
 ];
 
 // Class Features - Sorcerer (d6) - Arcane spells
 const SORCERER_FEATURES = [
-    "Dead Head, SPIRIT DR12 summon skull that ignores armor and deals 2d4 DMG (pg. 45)",
-    "Spiritual Possession, Random creature possessed by ghost, -2 DR ATK/DEF (pg. 45)",
-    "Protection, Summon spirit to protect ally -d2 armor for one hour (pg. 45)",
-    "Clairvoyance, SPIRIT check DR12 to ask spirit what is in nest room/area (pg. 45)",
-    "Necro-Sleep, SPIRIT check DR12 to sleep creature for d2 rounds (pg. 45)",
-    "Raise the Dead, Make thralls from corpses, 1 thrall at level 1, last until sunrise (pg. 45)"
+    "Dead Head (pg. 45)",
+    "Spiritual Possession (pg. 45)",
+    "Protection (pg. 45)",
+    "Clairvoyance (pg. 45)",
+    "Necro-Sleep (pg. 45)",
+    "Raise the Dead (pg. 45)"
 ];
 
 // d100 Thing of Importance Table

@@ -11,6 +11,7 @@ script.js.backup*
 # Image source files (keep JPG, ignore HEIC)
 *.heic
 *.HEIC
+IMG_1158.jpg
 
 # Thumbnails
 ._*
