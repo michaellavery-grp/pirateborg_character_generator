@@ -28,6 +28,20 @@ function roll2d6LeftToRight() {
     return `${die1}${die2}`;
 }
 
+// Roll with house rules option - makes low rolls high
+// Example: d8 roll of 1-4 becomes 5-8 (players get advantage at first level)
+function rollHighSided(sides, useHouseRules) {
+    const result = roll(sides);
+    if (useHouseRules) {
+        const midpoint = Math.ceil(sides / 2);
+        if (result <= midpoint) {
+            // Low roll (1 to midpoint) becomes high roll (midpoint+1 to max)
+            return sides - midpoint + result;
+        }
+    }
+    return result;
+}
+
 // ==================== MOCK CHARACTER DATA ====================
 
 // Name Generator - 2d6 read left-to-right (e.g., 2 and 6 = 26, not 8)
@@ -734,6 +748,9 @@ const HATS = [
 // ==================== CHARACTER GENERATION ====================
 
 function generateCharacter() {
+    // Check if house rules are enabled
+    const useHouseRules = document.getElementById('houseRulesCheckbox')?.checked || false;
+
     // Generate gender (d2: 1=male, 2=female)
     const gender = roll(2) === 1 ? "male" : "female";
 
@@ -812,24 +829,26 @@ function generateCharacter() {
     document.getElementById('spirit').textContent = formatModifier(abilities.spirit);
 
     // Generate HP (based on class hit die + toughness modifier, minimum 1)
+    // House rules: low rolls become high rolls for first level advantage
     let hp;
     if (charClass.hp === "d12") {
-        hp = roll(12) + abilities.toughness;
+        hp = rollHighSided(12, useHouseRules) + abilities.toughness;
     } else if (charClass.hp === "d10") {
-        hp = roll(10) + abilities.toughness;
+        hp = rollHighSided(10, useHouseRules) + abilities.toughness;
     } else if (charClass.hp === "d8") {
-        hp = roll(8) + abilities.toughness;
+        hp = rollHighSided(8, useHouseRules) + abilities.toughness;
     } else if (charClass.hp === "d6") {
-        hp = roll(6) + abilities.toughness;
+        hp = rollHighSided(6, useHouseRules) + abilities.toughness;
     } else if (charClass.hp === "d4") {
-        hp = roll(4) + abilities.toughness;
+        hp = rollHighSided(4, useHouseRules) + abilities.toughness;
     }
     hp = Math.max(1, hp); // HP can never go below 1
     document.getElementById('hitPoints').textContent = hp;
 
     // Generate Devil's Luck based on class (d2 for martial classes, d4 for magical)
+    // House rules: low rolls become high rolls for first level advantage
     const devilsLuckDie = parseInt(charClass.devilsLuck.substring(1)); // Extract number from "d2" or "d4"
-    const devilsLuck = roll(devilsLuckDie);
+    const devilsLuck = rollHighSided(devilsLuckDie, useHouseRules);
     document.getElementById('omens').textContent = devilsLuck;
 
     // Generate Background (d100) and starting silver
