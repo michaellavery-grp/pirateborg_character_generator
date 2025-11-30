@@ -105,6 +105,17 @@ body {
     user-select: none;
 }
 
+.lottie-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.lottie-animation lottie-player {
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+}
+
 /* Character Sheet */
 .character-sheet {
     background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
