@@ -20,6 +20,15 @@ function rollAbility() {
     return roll(6) + roll(6) + roll(6);
 }
 
+// Roll 4d6 and drop the lowest die (landlubber mode for better survivability)
+function rollAbilityLandlubber() {
+    const dice = [roll(6), roll(6), roll(6), roll(6)];
+    // Sort dice and drop the lowest (remove the first element after sorting)
+    dice.sort((a, b) => a - b);
+    // Sum the top 3 dice
+    return dice[1] + dice[2] + dice[3];
+}
+
 // Roll 2d6 and read left-to-right (e.g., 2 and 6 = "26", not 8)
 // Results in 36 combinations (11-66)
 function roll2d6LeftToRight() {
@@ -723,7 +732,7 @@ const CLOTHING = [
     "Commoners Clothes",
     "Commoners Clothes",
     "Old Uniform",
-    "Fancy Clother",
+    "Fancy Clothes",
     "Leather Armor (-d2)",
     "Hide Armor (-d2)",
     "Chain shirt (-d4, DR +2)",
@@ -742,7 +751,7 @@ const HATS = [
     "Plain tricorne",
     "Fancy tricorne",
     "Metal-lined hat (-1 dmg.)",
-    "Morion (-1 dmg.)m break for no damage"
+    "Morion (-1 dmg.), break for no damage"
 ];
 
 // ==================== CHARACTER GENERATION ====================
@@ -750,6 +759,8 @@ const HATS = [
 function generateCharacter() {
     // Check if house rules are enabled
     const useHouseRules = document.getElementById('houseRulesCheckbox')?.checked || false;
+    // Check if landlubber abilities are enabled
+    const useLandlubber = document.getElementById('landlubberCheckbox')?.checked || false;
 
     // Generate gender (d2: 1=male, 2=female)
     const gender = roll(2) === 1 ? "male" : "female";
@@ -799,13 +810,14 @@ function generateCharacter() {
             break;
     }
 
-    // Generate base abilities (3d6, subtract 10, divide by 2, cap at -3 to +6)
+    // Generate base abilities (3d6 or 4d6 drop lowest, subtract 10, divide by 2, cap at -3 to +6)
+    const abilityRoller = useLandlubber ? rollAbilityLandlubber : rollAbility;
     let abilities = {
-        strength: calculateModifier(rollAbility()),
-        agility: calculateModifier(rollAbility()),
-        presence: calculateModifier(rollAbility()),
-        toughness: calculateModifier(rollAbility()),
-        spirit: calculateModifier(rollAbility())
+        strength: calculateModifier(abilityRoller()),
+        agility: calculateModifier(abilityRoller()),
+        presence: calculateModifier(abilityRoller()),
+        toughness: calculateModifier(abilityRoller()),
+        spirit: calculateModifier(abilityRoller())
     };
 
     // Apply class-specific modifiers
@@ -917,9 +929,9 @@ function generateCharacter() {
     const habit = DISTINCTIVE_FLAWS[Math.floor(Math.random() * DISTINCTIVE_FLAWS.length)];
     document.getElementById('quirk').textContent = habit;
 
-    // Generate ritual (only for Wretch class)
+    // Generate ritual (only for Zealot and Sorcerer classes)
     const ritualSection = document.getElementById('ritualSection');
-    if (charClass.name === "Wretch") {
+    if (charClass.name === "Zealot" || charClass.name === "Sorcerer") {
         const ritual = RITUALS[Math.floor(Math.random() * RITUALS.length)];
         document.getElementById('ritual').innerHTML = `
             <p><strong>${ritual.name}</strong></p>

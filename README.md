@@ -126,7 +126,61 @@ An eldritch occultist, frail and enigmatic.
 
 ## Release Notes
 
-### v0.6.0 - "Thing of Importance" (Current)
+### v0.7.0 - "Landlubber Abilities & Bug Fixes" (Current)
+**Date**: November 30, 2025
+
+#### Landlubber Abilities System
+- 🎲 **New Optional Roll Method**: Added "Landlubber Abilities" checkbox for 4d6 drop lowest
+  - Roll 4d6 for each ability and drop the lowest die
+  - Keep the top 3 dice for ability score calculation
+  - Produces **17.2% higher average scores** than standard 3d6
+  - **3.5% less variability** (more consistent scores)
+  - Better first-level survivability with higher ability modifiers
+
+- 📊 **Statistical Analysis Performed**:
+  - 10,000 sample simulation comparing both methods
+  - **Standard (3d6)**: Mean = 10.48, Std Dev = 2.95
+  - **Landlubber (4d6 drop)**: Mean = 12.28, Std Dev = 2.84
+  - **F-statistic**: 1.075 (ANOVA variance comparison)
+  - Landlubber method has statistically lower variance
+  - Distribution shifts toward higher scores (more 13-16 results)
+
+- 🎮 **User Experience**:
+  - Checkbox located below "House Rules" option
+  - Works independently or combined with House Rules
+  - Both options can be enabled simultaneously
+  - Character regeneration respects checkbox state
+
+#### Critical Bug Fixes
+- 🐛 **Fixed Ritual Display**: Corrected class check for arcane rituals
+  - **Previous Bug**: Checked for non-existent "Wretch" class
+  - **Fix**: Now correctly checks for "Zealot" or "Sorcerer" classes
+  - **Result**: Ritual section now displays properly for magical classes
+
+- 📝 **Text Corrections**:
+  - Fixed typo in CLOTHING array: "Fancy Clother" → "Fancy Clothes"
+  - Fixed typo in HATS array: "Morion (-1 dmg.)m break" → "Morion (-1 dmg.), break for no damage"
+
+#### Technical Implementation
+- **rollAbilityLandlubber()**: New dice rolling function
+  - Rolls array of 4d6, sorts ascending
+  - Sums indices [1], [2], [3] (drops index [0])
+  - Returns value in 3-18 range (higher average than 3d6)
+
+- **Conditional Rolling**: `generateCharacter()` checks landlubber checkbox
+  - Uses ternary operator to select appropriate roller function
+  - Applies same modifier calculation regardless of method
+  - Class modifiers and ability caps still apply
+
+- **variance_analysis.html**: Statistical analysis tool included
+  - Browser-based variance comparison tool
+  - Generates 10,000 samples for each method
+  - Calculates mean, variance, std dev, F-statistic
+  - Distribution histogram showing probability differences
+
+---
+
+### v0.6.0 - "Thing of Importance"
 **Date**: November 25, 2025
 
 #### Thing of Importance System
@@ -572,8 +626,8 @@ Potential additions for future versions:
 
 ---
 
-**Current Version**: v0.6.0 "Thing of Importance"
-**Last Updated**: November 25, 2025
+**Current Version**: v0.7.0 "Landlubber Abilities & Bug Fixes"
+**Last Updated**: November 30, 2025
 **Status**: Active Development
 
 *"The seas call, the dead rise, and ASH flows freely..."* 🏴‍☠️

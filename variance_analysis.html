@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PIRATE BORG - Ability Score Variance Analysis</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #e0d5c7;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1, h2 { color: #ff6b6b; }
+        .stats-box {
+            background: #1a1a1a;
+            border: 2px solid #d4af37;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .comparison {
+            background: #000;
+            border: 2px solid #8b0000;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .highlight { color: #4ade80; font-weight: bold; }
+        pre { color: #e0d5c7; }
+    </style>
+</head>
+<body>
+    <h1>⚓ PIRATE BORG - Ability Score Variance Analysis ⚓</h1>
+    <p>Statistical comparison of Standard (3d6) vs Landlubber (4d6 drop lowest) ability score generation</p>
+
+    <button onclick="runAnalysis()" style="padding: 10px 20px; font-size: 16px; cursor: pointer;">Run Analysis (10,000 samples)</button>
+
+    <div id="results"></div>
+
+    <script>
+        function roll(sides) {
+            return Math.floor(Math.random() * sides) + 1;
+        }
+
+        function rollAbility() {
+            return roll(6) + roll(6) + roll(6);
+        }
+
+        function rollAbilityLandlubber() {
+            const dice = [roll(6), roll(6), roll(6), roll(6)];
+            dice.sort((a, b) => a - b);
+            return dice[1] + dice[2] + dice[3];
+        }
+
+        function calculateStats(values) {
+            const n = values.length;
+            const mean = values.reduce((a, b) => a + b, 0) / n;
+            const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / n;
+            const stdDev = Math.sqrt(variance);
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+
+            // Sort for percentiles
+            const sorted = [...values].sort((a, b) => a - b);
+            const median = sorted[Math.floor(n / 2)];
+            const q1 = sorted[Math.floor(n * 0.25)];
+            const q3 = sorted[Math.floor(n * 0.75)];
+
+            return { mean, variance, stdDev, min, max, n, median, q1, q3 };
+        }
+
+        function analyzeDistribution(values) {
+            const bins = {};
+            for (let i = 3; i <= 18; i++) bins[i] = 0;
+            values.forEach(v => bins[v]++);
+            return bins;
+        }
+
+        function runAnalysis() {
+            const numSamples = 10000;
+            const standard = [];
+            const landlubber = [];
+
+            // Generate samples
+            for (let i = 0; i < numSamples; i++) {
+                standard.push(rollAbility());
+                landlubber.push(rollAbilityLandlubber());
+            }
+
+            const standardStats = calculateStats(standard);
+            const landlubberStats = calculateStats(landlubber);
+            const standardDist = analyzeDistribution(standard);
+            const landlubberDist = analyzeDistribution(landlubber);
+
+            // Calculate F-statistic for variance comparison
+            const fStatistic = standardStats.variance / landlubberStats.variance;
+
+            // Build HTML output
+            let html = '<div class="stats-box">';
+            html += '<h2>STANDARD METHOD (3d6)</h2>';
+            html += '<pre>';
+            html += 'Sample Size:        ' + standardStats.n + '\n';
+            html += 'Mean:               ' + standardStats.mean.toFixed(3) + '\n';
+            html += 'Median:             ' + standardStats.median + '\n';
+            html += 'Variance:           ' + standardStats.variance.toFixed(3) + '\n';
+            html += 'Standard Deviation: ' + standardStats.stdDev.toFixed(3) + '\n';
+            html += 'Min:                ' + standardStats.min + '\n';
+            html += 'Max:                ' + standardStats.max + '\n';
+            html += 'Range:              ' + (standardStats.max - standardStats.min) + '\n';
+            html += 'Q1 (25th %ile):     ' + standardStats.q1 + '\n';
+            html += 'Q3 (75th %ile):     ' + standardStats.q3 + '\n';
+            html += '</pre></div>';
+
+            html += '<div class="stats-box">';
+            html += '<h2>LANDLUBBER METHOD (4d6 drop lowest)</h2>';
+            html += '<pre>';
+            html += 'Sample Size:        ' + landlubberStats.n + '\n';
+            html += 'Mean:               ' + landlubberStats.mean.toFixed(3) + '\n';
+            html += 'Median:             ' + landlubberStats.median + '\n';
+            html += 'Variance:           ' + landlubberStats.variance.toFixed(3) + '\n';
+            html += 'Standard Deviation: ' + landlubberStats.stdDev.toFixed(3) + '\n';
+            html += 'Min:                ' + landlubberStats.min + '\n';
+            html += 'Max:                ' + landlubberStats.max + '\n';
+            html += 'Range:              ' + (landlubberStats.max - landlubberStats.min) + '\n';
+            html += 'Q1 (25th %ile):     ' + landlubberStats.q1 + '\n';
+            html += 'Q3 (75th %ile):     ' + landlubberStats.q3 + '\n';
+            html += '</pre></div>';
+
+            html += '<div class="comparison">';
+            html += '<h2>COMPARATIVE ANALYSIS</h2>';
+            html += '<pre>';
+            html += 'Mean Difference:        ' + (landlubberStats.mean - standardStats.mean).toFixed(3);
+            html += ' (<span class="highlight">+' + ((landlubberStats.mean - standardStats.mean) / standardStats.mean * 100).toFixed(1) + '%</span>)\n';
+            html += 'Variance Ratio (S/L):   ' + (standardStats.variance / landlubberStats.variance).toFixed(3) + '\n';
+            html += 'Std Dev Difference:     ' + (standardStats.stdDev - landlubberStats.stdDev).toFixed(3);
+            html += ' (<span class="highlight">' + ((standardStats.stdDev - landlubberStats.stdDev) / standardStats.stdDev * 100).toFixed(1) + '% reduction</span>)\n';
+            html += '\n';
+            html += '<span class="highlight">F-STATISTIC (ANOVA Variance Comparison):</span>\n';
+            html += 'F = ' + fStatistic.toFixed(3) + '\n';
+            html += '(Standard has ' + fStatistic.toFixed(2) + 'x higher variance than Landlubber)\n';
+            html += '\n';
+            html += '<span class="highlight">INTERPRETATION:</span>\n';
+            html += '• Landlubber method produces <span class="highlight">' + ((landlubberStats.mean - standardStats.mean) / standardStats.mean * 100).toFixed(1) + '%</span> higher average scores\n';
+            html += '• Landlubber has <span class="highlight">' + ((standardStats.stdDev - landlubberStats.stdDev) / standardStats.stdDev * 100).toFixed(1) + '%</span> less variability (more consistent)\n';
+            html += '• Better survivability at 1st level with higher HP (from higher Toughness)\n';
+            html += '</pre></div>';
+
+            // Distribution comparison
+            html += '<div class="stats-box">';
+            html += '<h2>DISTRIBUTION COMPARISON</h2>';
+            html += '<table style="width: 100%; border-collapse: collapse;">';
+            html += '<tr style="border-bottom: 2px solid #d4af37;"><th>Score</th><th>Standard (3d6)</th><th>Landlubber (4d6 drop)</th></tr>';
+
+            for (let i = 3; i <= 18; i++) {
+                const stdPct = (standardDist[i] / numSamples * 100).toFixed(1);
+                const landPct = (landlubberDist[i] / numSamples * 100).toFixed(1);
+                const stdBar = '█'.repeat(Math.round(parseFloat(stdPct) / 2));
+                const landBar = '█'.repeat(Math.round(parseFloat(landPct) / 2));
+
+                html += '<tr style="border-bottom: 1px solid #333;">';
+                html += '<td style="padding: 5px; text-align: center;">' + i + '</td>';
+                html += '<td style="padding: 5px;">' + stdBar + ' ' + stdPct + '%</td>';
+                html += '<td style="padding: 5px;">' + landBar + ' ' + landPct + '%</td>';
+                html += '</tr>';
+            }
+            html += '</table></div>';
+
+            document.getElementById('results').innerHTML = html;
+        }
+    </script>
+</body>
+</html>
