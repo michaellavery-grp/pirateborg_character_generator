@@ -126,7 +126,51 @@ An eldritch occultist, frail and enigmatic.
 
 ## Release Notes
 
-### v0.6.0 - "Thing of Importance" (Current)
+### v0.6.1 - "House Rules: High-Sided Dice" (Current)
+**Date**: November 25, 2025
+
+#### House Rules System
+- ☑️ **Optional House Rules Checkbox**: Players can enable first-level advantage for HP and Devil's Luck
+  - Located in header below generate/print buttons
+  - Persists across character generations
+  - Gives new characters better survivability
+
+- 🎲 **High-Sided Dice Mechanic**: Low rolls become high rolls
+  - **How it works**: Rolls in lower half of die range convert to upper half
+  - **d2**: 1 → 2 (always maximum)
+  - **d4**: 1-2 → 3-4
+  - **d6**: 1-3 → 4-6
+  - **d8**: 1-4 → 5-8 (most common HP die)
+  - **d10**: 1-5 → 6-10
+  - **d12**: 1-6 → 7-12 (Brute HP)
+
+- 💪 **Practical Impact**:
+  - Sorcerer (d8 HP): Minimum 5 HP instead of 1 (before toughness modifier)
+  - Brute (d12 HP): Minimum 7 HP instead of 1 (before toughness modifier)
+  - Devil's Luck (d4): Minimum 3 points instead of 1
+  - Devil's Luck (d2): Always 2 points (martial classes)
+  - First-level characters are more resilient and fun to play
+
+- 🎨 **UI Styling**: Gold-bordered checkbox box matching pirate theme
+  - Clear explanation of house rule effect
+  - Accessible checkbox with gold accent color
+  - Non-intrusive placement
+
+#### Technical Implementation
+- **rollHighSided() function**: Core logic for converting rolls
+  - Takes die size and house rules boolean
+  - Calculates midpoint: `Math.ceil(sides / 2)`
+  - Converts low rolls: `sides - midpoint + result`
+  - Returns original roll if house rules disabled
+
+- **Applied to**:
+  - All HP calculations (d4, d6, d8, d10, d12)
+  - All Devil's Luck calculations (d2, d4)
+  - Does NOT affect ability scores (keeps character diversity)
+
+---
+
+### v0.6.0 - "Thing of Importance"
 **Date**: November 25, 2025
 
 #### Thing of Importance System
@@ -572,7 +616,7 @@ Potential additions for future versions:
 
 ---
 
-**Current Version**: v0.6.0 "Thing of Importance"
+**Current Version**: v0.6.1 "House Rules: High-Sided Dice"
 **Last Updated**: November 25, 2025
 **Status**: Active Development
 
